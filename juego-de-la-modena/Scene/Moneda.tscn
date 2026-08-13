@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://d4abottejaqpy"]
+
+[ext_resource type="Texture2D" uid="uid://b12r5a7ugj0wi" path="res://Sprites/Gemini_Generated_Image_b2cd5xb2cd5xb2cd.png" id="1_j5ugo"]
+[ext_resource type="Script" uid="uid://b07ouy5wsfmop" path="res://Scrips/moneda.gd" id="1_ysja8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_j5ugo"]
+radius = 70.256676
+
+[node name="Node2D" type="Area2D" unique_id=867580137]
+position = Vector2(-217, -52)
+script = ExtResource("1_ysja8")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=59868628]
+position = Vector2(485.49994, 254.5)
+scale = Vector2(0.090332106, 0.08642578)
+texture = ExtResource("1_j5ugo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1778444897]
+position = Vector2(484, 256)
+shape = SubResource("CircleShape2D_j5ugo")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
