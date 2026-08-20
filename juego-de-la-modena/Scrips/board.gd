@@ -1,6 +1,5 @@
 extends Node2D
 
-
 # ============================================================
 # CONFIGURACIÓN DEL TABLERO
 # ============================================================
@@ -11,28 +10,22 @@ extends Node2D
 # Distancia desde el centro del tablero hasta las monedas.
 @export var radio := 200.0
 
-
 # ============================================================
 # INFORMACIÓN DEL JUEGO
 # ============================================================
 
 # Indica qué jugador tiene el turno.
-#
 # 1 = Jugador 1
 # 2 = Jugador 2
 var jugador_actual := 1
 
-
 # Contiene todas las monedas creadas por el Board.
 var monedas = []
 
-
 # Contiene las monedas que el jugador seleccionó
 # durante el turno actual.
-#
 # Como máximo podremos tener 2.
 var monedas_seleccionadas = []
-
 
 # ============================================================
 # ESCENA DE LA MONEDA
@@ -40,7 +33,6 @@ var monedas_seleccionadas = []
 
 # Cargamos la escena Moneda.tscn.
 var moneda_scene = preload("res://Scene/Moneda.tscn")
-
 
 # ============================================================
 # ELEMENTOS DE LA INTERFAZ
@@ -54,6 +46,9 @@ var moneda_scene = preload("res://Scene/Moneda.tscn")
 
 # Label que muestra mensajes al jugador.
 @onready var label_mensaje = $"../UI/LabelMensaje"
+
+#Label de quien gano el juego
+@onready var label_ganador = $"../UI/LabelGanador"
 
 # Botón que confirma la jugada.
 @onready var button_confirmar = $"../UI/ButtonConfirmarmar"
@@ -101,7 +96,6 @@ func crear_monedas():
 		moneda.indice = i
 
 		# Conectamos la señal de la moneda con el Board.
-		#
 		# Cuando la moneda reciba un clic,
 		# se ejecutará _on_moneda_presionada().
 		moneda.moneda_presionada.connect(_on_moneda_presionada)
@@ -216,10 +210,9 @@ func son_adyacentes(moneda_a, moneda_b) -> bool:
 
 	# Calculamos cuánto deberían medir aproximadamente
 	# dos monedas que se están tocando.
-	#
 	# Este valor tendremos que ajustarlo dependiendo
 	# del tamaño real de tu Sprite.
-	var distancia_adyacente = 55.0
+	var distancia_adyacente = 180.0 
 
 	# Si la distancia es menor o igual al límite,
 	# consideramos que las monedas están tocándose.
@@ -234,78 +227,69 @@ func _on_button_confirmar_pressed():
 
 	# Comprobamos que haya al menos una moneda seleccionada.
 	if monedas_seleccionadas.size() == 0:
-
 		label_mensaje.text = "Tenés que seleccionar una moneda"
-
 		return
-
 
 	# --------------------------------------------------------
 	# ELIMINAR LAS MONEDAS SELECCIONADAS
 	# --------------------------------------------------------
 
 	for moneda in monedas_seleccionadas:
-
 		# Eliminamos la moneda de la escena.
 		moneda.queue_free()
-
 		# La quitamos de la lista general.
 		monedas.erase(moneda)
-
 		# Reducimos el contador.
 		cantidad_monedas -= 1
-
 
 	# --------------------------------------------------------
 	# LIMPIAR LA SELECCIÓN
 	# --------------------------------------------------------
 
 	# Ya procesamos las monedas.
-	#
 	# Por eso vaciamos la lista.
 	monedas_seleccionadas.clear()
-
 
 	# --------------------------------------------------------
 	# ACTUALIZAR EL JUEGO
 	# --------------------------------------------------------
 
-	# Actualizamos los textos.
-	actualizar_interfaz()
-
 	# Cambiamos el turno.
 	cambiar_turno()
-
-	# Mostramos un mensaje.
-	label_mensaje.text = "Turno del Jugador " + str(jugador_actual)
-
+	
+	# Actualizamos los textos.
+	actualizar_interfaz()
+	
+	#Muestra el ganador
+	ganador()
 
 # ============================================================
 # CAMBIAR TURNO
 # ============================================================
 
 func cambiar_turno():
-
 	# Si está jugando el Jugador 1...
 	if jugador_actual == 1:
-
 		# Ahora juega el Jugador 2.
 		jugador_actual = 2
-
+	
 	else:
-
 		# De lo contrario, vuelve a jugar el Jugador 1.
 		jugador_actual = 1
 
+func ganador():
+	#Si ya no hay mas monedas muestro quien gano la partidad
+	if cantidad_monedas == 0:
+		label_ganador.text = "Gano el jugador: " + str(jugador_actual)
 
 # ============================================================
 # ACTUALIZAR INTERFAZ
 # ============================================================
 
 func actualizar_interfaz():
-
 	# Mostramos quién está jugando.
 	label_turno.text = "Turno: Jugador " + str(jugador_actual)
 
 	# Mostramos cuántas monedas quedan.
 	label_monedas.text = "Monedas: " + str(cantidad_monedas)
+	

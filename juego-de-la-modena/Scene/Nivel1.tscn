@@ -19,10 +19,15 @@ offset_right = 40.0
 offset_bottom = 23.0
 
 [node name="LabelMensaje" type="Label" parent="UI" unique_id=760087694]
-offset_left = 85.0
-offset_top = 1.0
-offset_right = 125.0
-offset_bottom = 24.0
+offset_top = 69.0
+offset_right = 123.0
+offset_bottom = 92.0
+
+[node name="LabelGanador" type="Label" parent="UI" unique_id=1515764419]
+offset_left = 477.0
+offset_top = -1.0
+offset_right = 667.0
+offset_bottom = 67.0
 
 [node name="ButtonConfirmarmar" type="Button" parent="UI" unique_id=2005700586]
 offset_left = 496.0
