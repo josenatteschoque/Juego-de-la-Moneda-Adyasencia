@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bxo7h6an1q86m"
-path="res://.godot/imported/SpriteMoneda.png-85ed22a8059b389cc7c328eff8cdd9c6.ctex"
+uid="uid://dan1s7ns5tgk0"
+path="res://.godot/imported/Tablero.png-fddf46fdb778f9173dbc51362e96b674.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/SpriteMoneda.png"
-dest_files=["res://.godot/imported/SpriteMoneda.png-85ed22a8059b389cc7c328eff8cdd9c6.ctex"]
+source_file="res://Assets/Tablero.png"
+dest_files=["res://.godot/imported/Tablero.png-fddf46fdb778f9173dbc51362e96b674.ctex"]
 
 [params]
 
-compress/mode=3
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -37,4 +37,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

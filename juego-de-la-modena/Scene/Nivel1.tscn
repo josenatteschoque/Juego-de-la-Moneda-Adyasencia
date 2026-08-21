@@ -1,8 +1,18 @@
 [gd_scene format=3 uid="uid://c6gpiuxgcohav"]
 
 [ext_resource type="Script" uid="uid://bkmy015micesy" path="res://Scrips/board.gd" id="1_7m1mh"]
+[ext_resource type="Texture2D" uid="uid://dan1s7ns5tgk0" path="res://Assets/Tablero.png" id="1_t21e5"]
+[ext_resource type="AudioStream" uid="uid://cfkecnx7gywtk" path="res://Music/The_Architect_s_Proof.mp3" id="3_u8plk"]
 
-[node name="Node2D" type="Node2D" unique_id=481519860]
+[node name="Nivel1Node2D" type="Node2D" unique_id=481519860]
+
+[node name="FondoTextureRect" type="TextureRect" parent="." unique_id=622189912]
+texture_filter = 1
+offset_top = -198.0
+offset_right = 1158.0
+offset_bottom = 773.0
+mouse_filter = 2
+texture = ExtResource("1_t21e5")
 
 [node name="Board" type="Node2D" parent="." unique_id=1720468723]
 script = ExtResource("1_7m1mh")
@@ -35,3 +45,7 @@ offset_top = 291.0
 offset_right = 650.0
 offset_bottom = 380.0
 text = "RETIRAR"
+
+[node name="MusicaFondo" type="AudioStreamPlayer" parent="." unique_id=1594573600]
+stream = ExtResource("3_u8plk")
+autoplay = true

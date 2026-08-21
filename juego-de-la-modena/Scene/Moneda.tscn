@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d4abottejaqpy"]
 
 [ext_resource type="Script" uid="uid://b07ouy5wsfmop" path="res://Scrips/moneda.gd" id="1_ysja8"]
-[ext_resource type="Texture2D" uid="uid://bxo7h6an1q86m" path="res://Sprites/SpriteMoneda.png" id="2_j5ugo"]
+[ext_resource type="Texture2D" uid="uid://bxo7h6an1q86m" path="res://Assets/SpriteMoneda.png" id="2_j5ugo"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j5ugo"]
 radius = 70.256676

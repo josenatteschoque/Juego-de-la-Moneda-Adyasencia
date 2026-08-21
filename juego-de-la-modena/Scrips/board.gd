@@ -224,7 +224,6 @@ func son_adyacentes(moneda_a, moneda_b) -> bool:
 # ============================================================
 
 func _on_button_confirmar_pressed():
-
 	# Comprobamos que haya al menos una moneda seleccionada.
 	if monedas_seleccionadas.size() == 0:
 		label_mensaje.text = "Tenés que seleccionar una moneda"
@@ -233,7 +232,6 @@ func _on_button_confirmar_pressed():
 	# --------------------------------------------------------
 	# ELIMINAR LAS MONEDAS SELECCIONADAS
 	# --------------------------------------------------------
-
 	for moneda in monedas_seleccionadas:
 		# Eliminamos la moneda de la escena.
 		moneda.queue_free()
@@ -241,32 +239,31 @@ func _on_button_confirmar_pressed():
 		monedas.erase(moneda)
 		# Reducimos el contador.
 		cantidad_monedas -= 1
-
 	# --------------------------------------------------------
 	# LIMPIAR LA SELECCIÓN
 	# --------------------------------------------------------
-
 	# Ya procesamos las monedas.
 	# Por eso vaciamos la lista.
 	monedas_seleccionadas.clear()
 
 	# --------------------------------------------------------
-	# ACTUALIZAR EL JUEGO
+	# COMPROBAR SI TERMINÓ LA PARTIDA
 	# --------------------------------------------------------
 
-	# Cambiamos el turno.
+	# Llamamos a ganador() antes de cambiar el turno.
+	# Esto es importante porque jugador_actual todavía
+	# representa al jugador que acaba de realizar la jugada.
+	if ganador():
+		return
+
+	# --------------------------------------------------------
+	# ACTUALIZAR EL JUEGO
+	# --------------------------------------------------------
+	# Si todavía quedan monedas, cambiamos de jugador.
 	cambiar_turno()
-	
 	# Actualizamos los textos.
 	actualizar_interfaz()
 	
-	#Muestra el ganador
-	ganador()
-
-# ============================================================
-# CAMBIAR TURNO
-# ============================================================
-
 func cambiar_turno():
 	# Si está jugando el Jugador 1...
 	if jugador_actual == 1:
@@ -277,11 +274,20 @@ func cambiar_turno():
 		# De lo contrario, vuelve a jugar el Jugador 1.
 		jugador_actual = 1
 
-func ganador():
-	#Si ya no hay mas monedas muestro quien gano la partidad
-	if cantidad_monedas == 0:
-		label_ganador.text = "Gano el jugador: " + str(jugador_actual)
 
+func ganador() -> bool:
+
+	if cantidad_monedas == 0:
+
+		label_ganador.text = "Ganó el jugador: " + str(jugador_actual)
+
+		label_mensaje.text = "¡Fin de la partida! Presione una tecla para salir."
+
+		button_confirmar.disabled = true
+		return true
+
+	return false
+	
 # ============================================================
 # ACTUALIZAR INTERFAZ
 # ============================================================
@@ -293,3 +299,8 @@ func actualizar_interfaz():
 	# Mostramos cuántas monedas quedan.
 	label_monedas.text = "Monedas: " + str(cantidad_monedas)
 	
+#Esta funcion permite salir del juego despues de haber ganado
+func _input(event):
+	if cantidad_monedas == 0:
+		if event is InputEventKey and event.pressed:
+			get_tree().quit()

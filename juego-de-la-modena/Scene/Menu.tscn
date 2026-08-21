@@ -1,0 +1,103 @@
+[gd_scene format=3 uid="uid://comkng3yiatuj"]
+
+[ext_resource type="Texture2D" uid="uid://c5hcyfa5xcc56" path="res://Assets/Menu.png" id="1_dvvdh"]
+[ext_resource type="Script" uid="uid://bp0uqk3uns48f" path="res://Scrips/menu.gd" id="1_mcucm"]
+[ext_resource type="AudioStream" uid="uid://cfkecnx7gywtk" path="res://Music/The_Architect_s_Proof.mp3" id="3_ldxh0"]
+
+[node name="MenuControl" type="Control" unique_id=198406794]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1153.0
+offset_bottom = 647.0
+script = ExtResource("1_mcucm")
+
+[node name="FondoTextureRect" type="TextureRect" parent="." unique_id=545325741]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -109.0
+offset_right = -2.0
+offset_bottom = 197.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_dvvdh")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=2126381347]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -167.5
+offset_top = -53.5
+offset_right = 167.5
+offset_bottom = 53.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ButtonJugar" type="Button" parent="VBoxContainer" unique_id=1181749440]
+layout_mode = 2
+text = "JUGAR"
+
+[node name="ButtonInfo" type="Button" parent="VBoxContainer" unique_id=1547052109]
+layout_mode = 2
+text = "INFORMACION"
+
+[node name="ButtonSalir" type="Button" parent="VBoxContainer" unique_id=1433576113]
+layout_mode = 2
+text = "SALIR"
+
+[node name="PanelInfo" type="Panel" parent="." unique_id=1944546836]
+visible = false
+layout_mode = 0
+offset_right = 1158.0
+offset_bottom = 643.0
+
+[node name="Label" type="Label" parent="PanelInfo" unique_id=1235939637]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -413.0
+offset_top = -167.5
+offset_right = 413.0
+offset_bottom = 167.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "¿CÓMO JUGAR?
+Adyacentes es un juego de estrategia para dos jugadores.
+Las monedas se encuentran formando un círculo y los jugadores se turnan para retirarlas.
+
+REGLAS
+En cada turno, el jugador puede retirar 1 o 2 monedas.
+Si retira 2 monedas, estas deben ser adyacentes, es decir, deben estar tocándose.
+Si solamente queda 1 moneda, puede retirarse aunque no esté junto a otra.
+Después de realizar una jugada, comienza el turno del otro jugador.
+Gana el jugador que retira la última moneda.
+🧠 Estrategia
+Una estrategia importante es el juego en espejo: intentar mantener una distribución simétrica 
+de las monedas para poder responder a la jugada del oponente de manera equivalente."
+
+[node name="ButtonVolver" type="Button" parent="PanelInfo" unique_id=1143718274]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -44.5
+offset_top = -39.0
+offset_right = 44.5
+grow_horizontal = 2
+grow_vertical = 0
+text = "VOLVER"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=2145543359]
+stream = ExtResource("3_ldxh0")
+autoplay = true
