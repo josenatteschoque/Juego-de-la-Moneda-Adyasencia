@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://cws2ivvjit8ry"]
+
+[ext_resource type="PackedScene" uid="uid://ci3lpuo5xjunk" path="res://Componentes/casilla.tscn" id="1_ng2w2"]
+[ext_resource type="PackedScene" uid="uid://btf3qg65rr0tb" path="res://Componentes/personaje.tscn" id="2_750bm"]
+
+[sub_resource type="GDScript" id="GDScript_1ir6t"]
+script/source = "extends Node3D
+
+@export var escena_casilla: PackedScene
+@export var escena_personaje: PackedScene
+@export_file(\"*.json\") var datos_nivel: String
+@export var escala: float = 2.0
+
+func _ready():
+	var datos := cargar_datos(datos_nivel)
+	crear_nivel(datos)
+	
+
+func cargar_datos(archivo: String) -> Dictionary:
+	var json : JSON = ResourceLoader.load(archivo)
+	return json.data
+
+func crear_nivel(datos: Dictionary) -> void:
+	for i in range(datos.mapa.casillas.size()):
+		# Crea la casilla y la agrega al tablero.
+		var casilla_data = datos.mapa.casillas[i]
+		var casilla = escena_casilla.instantiate()
+		casilla.position = Vector3(casilla_data.posicion.x,0,casilla_data.posicion.y) * escala
+		add_child(casilla)
+		
+		# Crea el personaje y lo agrega a la casilla.
+		var personaje_data = datos.personajes[i]
+		var personaje = escena_personaje.instantiate()
+		casilla.add_child(personaje)
+"
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0wdmv"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_qx3aq"]
+sky_material = SubResource("ProceduralSkyMaterial_0wdmv")
+
+[sub_resource type="Environment" id="Environment_ng2w2"]
+background_mode = 2
+sky = SubResource("Sky_qx3aq")
+glow_enabled = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1ir6t"]
+size = Vector2(100, 100)
+
+[node name="Mundo" type="Node3D" unique_id=729540569]
+script = SubResource("GDScript_1ir6t")
+escena_casilla = ExtResource("1_ng2w2")
+escena_personaje = ExtResource("2_750bm")
+datos_nivel = "res://Datos/nivel001.json"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=835534736]
+environment = SubResource("Environment_ng2w2")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=950289777]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="MainCam" type="Camera3D" parent="." unique_id=1833399474]
+transform = Transform3D(0.99999046, -0.0018956255, 0.003930038, 0, 0.9006982, 0.43444532, -0.0043633236, -0.43444118, 0.9006896, 0.039577175, 5.0852656, 6.836605)
+
+[node name="Tablero" type="MeshInstance3D" parent="." unique_id=725833003]
+mesh = SubResource("PlaneMesh_1ir6t")

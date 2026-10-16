@@ -1,0 +1,33 @@
+{
+	"mapa": {
+		"casillas": [
+			{"posicion": {"x":  1, "y":  0}},
+			{"posicion": {"x":  0.7, "y":  0.7}},
+			{"posicion": {"x":  0, "y":  1}},
+			{"posicion": {"x":  0.7, "y": -0.7}},
+			{"posicion": {"x": -1, "y": 0}},
+			{"posicion": {"x": -0.7, "y":  0.7}},
+			{"posicion": {"x":  0, "y": -1}},
+			{"posicion": {"x":  -0.7, "y":  -0.7}}
+		],
+		"conexiones": [
+			{"origen": 0, "destino": 1},
+			{"origen": 1, "destino": 2},
+			{"origen": 2, "destino": 3},
+			{"origen": 3, "destino": 4},
+			{"origen": 4, "destino": 5},
+			{"origen": 5, "destino": 6},
+			{"origen": 6, "destino": 7}
+		]
+	},
+	"personajes": [
+		"Rey",
+		"Campesino",
+		"Campesino",
+		"Campesino",
+		"Campesino",
+		"Campesino",
+		"Campesino",
+		"Campesino",
+	]
+}
